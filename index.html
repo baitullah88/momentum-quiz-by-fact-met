@@ -3,117 +3,204 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Momentum Quiz</title>
+  <title>Momentum Quiz by Fact_Met</title>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      background: linear-gradient(135deg, #007bff, #00a2ff);
       color: #fff;
-    }
-
-    header, footer {
-      background: #111;
-      color: white;
       text-align: center;
-      padding: 20px;
     }
 
-    header img {
-      width: 80px;
-      vertical-align: middle;
+    header {
+      background: #006edc;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
     }
 
-    header h1 {
-      display: inline;
-      margin-left: 10px;
+    header img.logo {
+      width: 60px;
+    }
+
+    header img.profile {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    h1 {
       font-size: 1.8rem;
     }
 
     main {
-      text-align: center;
-      padding: 50px 20px;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
-    .quiz-container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: #1f1f1f;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-    }
-
-    h2 {
-      color: #00e0ff;
-    }
-
-    .social-links {
+    button {
+      background: white;
+      color: #007bff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
       margin-top: 15px;
     }
 
-    .social-links a {
-      margin: 0 10px;
-      color: #00e0ff;
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-
-    .social-links a:hover {
-      color: #00bcd4;
+    button:hover {
+      background: #e0e0e0;
     }
 
     footer {
-      font-size: 0.9rem;
-      background: #0d0d0d;
+      margin-top: 25px;
+      background: #005fcc;
+      padding: 10px;
     }
 
-    footer .social-links {
+    .socials a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .question {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .feedback {
       margin-top: 10px;
-    }
-
-    footer img {
-      width: 25px;
-      vertical-align: middle;
-      margin: 0 6px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="Screenshot 2025-10-17 230029.png" alt="Momentum Logo" />
-    <h1>Momentum Quiz</h1>
-    <div class="social-links">
-      <a href="https://discord.gg/mmtfinance" target="_blank">Discord</a> |
-      <a href="https://x.com/MMTFinance" target="_blank">X (Twitter)</a> |
-      <a href="https://www.mmt.finance/" target="_blank">Website</a>
-    </div>
+    <img src="WhatsApp Image 2025-10-17 at 11.13.59 PM.jpeg" alt="Profile" class="profile">
+    <img src="Screenshot 2025-10-17 230029.png" alt="Logo" class="logo">
+    <h1>Momentum Quiz by Fact_Met</h1>
   </header>
 
   <main>
-    <div class="quiz-container">
-      <h2>🚀 Welcome to the Momentum Quiz!</h2>
-      <p>Test your Web3 and crypto knowledge — earn rewards and boost your rank in the Momentum community.</p>
-      <button style="background:#00e0ff; color:#000; border:none; padding:12px 25px; border-radius:8px; cursor:pointer; font-size:1rem;">Start Quiz</button>
+    <h2>🚀 Welcome to the Momentum Quiz!</h2>
+    <p>Test your Web3 and crypto knowledge — earn rewards and boost your rank in the Momentum community.</p>
+    <button id="start-btn">Start Quiz</button>
+
+    <div id="quiz-container" style="display:none;">
+      <div id="question" class="question"></div>
+      <div id="options"></div>
+      <div id="feedback" class="feedback"></div>
+      <button id="next-btn" style="display:none;">Next</button>
     </div>
+
+    <div id="result" style="display:none;"></div>
   </main>
 
   <footer>
-    <p>© 2025 Momentum Lab — All Rights Reserved</p>
-    <div class="social-links">
-      <a href="https://discord.gg/mmtfinance" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" />
-      </a>
-      <a href="https://x.com/MMTFinance" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" />
-      </a>
-      <a href="https://www.mmt.finance/" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/84/84195.png" alt="Website" />
-      </a>
+    <div class="socials">
+      <a href="https://discord.gg/mmtfinance" target="_blank">Discord</a> |
+      <a href="https://x.com/MMTFinance" target="_blank">X (Momentum)</a> |
+      <a href="https://www.mmt.finance/" target="_blank">Website</a> |
+      <a href="https://x.com/fact_met" target="_blank">My X Profile</a>
     </div>
   </footer>
 
+  <script>
+    const questions = [
+      {
+        q: "What does DeFi stand for?",
+        options: ["Decentralized Finance", "Defined Finance", "Definite Fund"],
+        correct: 0
+      },
+      {
+        q: "Which blockchain is known for smart contracts?",
+        options: ["Bitcoin", "Ethereum", "Dogecoin"],
+        correct: 1
+      },
+      {
+        q: "What is Momentum Finance about?",
+        options: ["DeFi & Web3 community", "Gaming", "AI only"],
+        correct: 0
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+
+    const startBtn = document.getElementById('start-btn');
+    const quizContainer = document.getElementById('quiz-container');
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const nextBtn = document.getElementById('next-btn');
+    const resultEl = document.getElementById('result');
+
+    startBtn.addEventListener('click', startQuiz);
+
+    function startQuiz() {
+      startBtn.style.display = 'none';
+      quizContainer.style.display = 'block';
+      showQuestion();
+    }
+
+    function showQuestion() {
+      feedbackEl.textContent = "";
+      nextBtn.style.display = "none";
+      const q = questions[current];
+      questionEl.textContent = q.q;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(i);
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(i) {
+      const q = questions[current];
+      if (i === q.correct) {
+        feedbackEl.textContent = "✅ Correct!";
+        feedbackEl.style.color = "lightgreen";
+        score++;
+      } else {
+        feedbackEl.textContent = "❌ Incorrect! Correct answer: " + q.options[q.correct];
+        feedbackEl.style.color = "red";
+      }
+      nextBtn.style.display = "inline-block";
+    }
+
+    nextBtn.addEventListener('click', () => {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quizContainer.style.display = 'none';
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `<h2>🎉 Quiz Completed!</h2><p>Your Score: ${score} / ${questions.length}</p>`;
+    }
+  </script>
 </body>
 </html>
+
+</html>
+
