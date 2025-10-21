@@ -7,11 +7,10 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #0f172a, #000);
+      background: radial-gradient(circle at top, #001f3f, #000814);
       color: #fff;
       margin: 0;
       text-align: center;
-      overflow-x: hidden;
     }
     header {
       display: flex;
@@ -19,123 +18,194 @@
       align-items: center;
       background: rgba(0, 0, 0, 0.8);
       padding: 10px 20px;
-      border-bottom: 2px solid #3b82f6;
+      border-bottom: 2px solid #00aaff;
     }
     header img {
-      height: 40px;
-      border-radius: 8px;
+      height: 50px;
+      border-radius: 10px;
     }
     header a {
-      color: #3b82f6;
+      color: #00aaff;
       text-decoration: none;
       font-weight: bold;
       margin-left: 15px;
-      transition: color 0.3s;
     }
-    header a:hover { color: #60a5fa; }
+    header a:hover { color: #33ccff; }
 
     .container {
-      margin: 60px auto;
+      margin: 50px auto;
       max-width: 600px;
-      background: rgba(17, 24, 39, 0.8);
+      background: rgba(0, 10, 25, 0.9);
       padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.4);
     }
-    h1 { color: #60a5fa; margin-bottom: 10px; }
-    p { color: #cbd5e1; }
-    input {
-      width: 80%;
+    h1 { color: #00aaff; margin-bottom: 10px; }
+    .question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .option {
+      display: block;
+      background: #002b5b;
+      margin: 10px 0;
       padding: 10px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      margin-top: 15px;
-      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .option:hover { background: #004b8d; }
+    .result {
+      font-weight: bold;
+      margin-top: 20px;
     }
     button {
-      background: #3b82f6;
+      background: #00aaff;
       color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 10px;
       cursor: pointer;
-      margin-top: 15px;
       font-size: 16px;
-      transition: background 0.3s;
+      margin-top: 15px;
     }
-    button:hover { background: #2563eb; }
-    .result { margin-top: 15px; font-weight: bold; }
+    button:hover { background: #0095e0; }
   </style>
 </head>
 <body>
   <header>
-    <img src="WhatsApp Image 2025-10-17 at 11.13.59 PM.jpeg" alt="Momentum Logo">
+    <img src="momentum-logo.png" alt="Momentum Logo">
     <div>
       <a href="https://x.com/fact_met" target="_blank">My X</a> |
-      <a href="https://discord.gg/" target="_blank">Discord</a> |
-      <a href="https://momentum.xyz" target="_blank">Website</a>
+      <a href="https://momentum.xyz" target="_blank">Momentum Website</a>
     </div>
   </header>
 
   <div class="container">
-    <h1>🚀 Momentum Quiz</h1>
-    <p>Test your crypto knowledge & boost your Momentum rank!</p>
-    <div id="quiz-box">
-      <button id="start-btn">Start Quiz</button>
-    </div>
-    <div id="result" class="result"></div>
+    <h1>🚀 Momentum Knowledge Quiz</h1>
+    <div id="quiz"></div>
+    <div class="result" id="result"></div>
+    <button id="nextBtn" style="display:none;">Next</button>
+    <button id="restartBtn" style="display:none;">Restart Quiz</button>
   </div>
 
   <script>
     const quizData = [
-      { q: "What is DeFi short for?", a: "Decentralized Finance" },
-      { q: "Which blockchain introduced smart contracts?", a: "Ethereum" },
-      { q: "What is a crypto wallet used for?", a: "Storing digital assets" },
-      { q: "What does NFT stand for?", a: "Non-Fungible Token" },
-      { q: "What is Bitcoin’s consensus mechanism?", a: "Proof of Work" },
-      { q: "What is staking in crypto?", a: "Locking tokens to support the network" },
-      { q: "What is a DAO?", a: "Decentralized Autonomous Organization" },
-      { q: "What is the native token of Ethereum?", a: "ETH" },
-      { q: "What is blockchain?", a: "A distributed digital ledger" },
-      { q: "What does Web3 represent?", a: "A decentralized internet" },
-      { q: "What is the purpose of an airdrop?", a: "Reward users with free tokens" },
-      { q: "What is liquidity in crypto?", a: "Ease of trading an asset" },
+      {
+        q: "What blockchain is Momentum Finance built on?",
+        options: ["Ethereum", "Sui", "Solana", "Aptos"],
+        correct: 1
+      },
+      {
+        q: "Who is the CEO of Momentum Finance?",
+        options: ["Vitalik Buterin", "Wendy Fu", "Mario Nawfal", "Changpeng Zhao"],
+        correct: 1
+      },
+      {
+        q: "What does MMT stand for?",
+        options: ["Momentum Token", "Main Market Trade", "Momentum Finance", "Meta Money Token"],
+        correct: 0
+      },
+      {
+        q: "Which feature allows users to stake SUI and use it in DeFi?",
+        options: ["Vaults", "xSUI", "MSafe", "TGL"],
+        correct: 1
+      },
+      {
+        q: "What is Momentum’s DEX model inspired by?",
+        options: ["Curve", "Uniswap v3", "Balancer", "PancakeSwap"],
+        correct: 1
+      },
+      {
+        q: "Which protocol powers cross-chain interoperability for Momentum?",
+        options: ["LayerZero", "Wormhole", "Axelar", "Polygon"],
+        correct: 1
+      },
+      {
+        q: "What type of assets does Momentum aim to unify?",
+        options: ["Only NFTs", "Only Crypto", "Crypto + Real World Assets", "Only Stablecoins"],
+        correct: 2
+      },
+      {
+        q: "What is MSafe in the Momentum ecosystem?",
+        options: ["A yield vault", "A multi-sig wallet", "A DEX", "A bridge"],
+        correct: 1
+      },
+      {
+        q: "What is the governance token of Momentum?",
+        options: ["MMT", "SUI", "USDC", "MOVE"],
+        correct: 0
+      },
+      {
+        q: "Which feature automates yield strategies on Momentum?",
+        options: ["Vaults", "Zap In", "Momentum X", "TGL"],
+        correct: 0
+      },
+      {
+        q: "Which VC firm backed Momentum Finance?",
+        options: ["OKX Ventures", "Binance Labs", "a16z", "Sequoia"],
+        correct: 0
+      },
+      {
+        q: "What technology ensures on-chain compliance for RWAs?",
+        options: ["Zero Knowledge Proofs", "AI Models", "Layer 2 Rollups", "Bridges"],
+        correct: 0
+      }
     ];
 
-    let index = 0;
-    const quizBox = document.getElementById("quiz-box");
-    const result = document.getElementById("result");
+    let current = 0;
+    let score = 0;
 
-    document.getElementById("start-btn").addEventListener("click", loadQuiz);
+    const quizEl = document.getElementById("quiz");
+    const resultEl = document.getElementById("result");
+    const nextBtn = document.getElementById("nextBtn");
+    const restartBtn = document.getElementById("restartBtn");
 
     function loadQuiz() {
-      if (index < quizData.length) {
-        const current = quizData[index];
-        quizBox.innerHTML = `
-          <h2>${current.q}</h2>
-          <input type="text" id="answer" placeholder="Type your answer..." />
-          <button onclick="checkAnswer()">Submit</button>
-        `;
-      } else {
-        quizBox.innerHTML = `<h2>🎉 You completed the Momentum Quiz!</h2>`;
-      }
+      const qData = quizData[current];
+      quizEl.innerHTML = `
+        <div class="question">${current + 1}. ${qData.q}</div>
+        ${qData.options.map((opt, i) => `<div class='option' onclick='checkAnswer(${i})'>${opt}</div>`).join('')}
+      `;
+      resultEl.innerHTML = "";
+      nextBtn.style.display = "none";
     }
 
-    function checkAnswer() {
-      const ans = document.getElementById("answer").value.trim().toLowerCase();
-      const correct = quizData[index].a.toLowerCase();
-      if (ans === correct) {
-        result.innerHTML = "✅ Correct!";
+    function checkAnswer(selected) {
+      const correct = quizData[current].correct;
+      if (selected === correct) {
+        resultEl.innerHTML = "✅ Correct!";
+        score++;
       } else {
-        result.innerHTML = `❌ Incorrect! Correct: <b>${quizData[index].a}</b>`;
+        resultEl.innerHTML = `❌ Incorrect! Correct Answer: <b>${quizData[current].options[correct]}</b>`;
       }
-      index++;
-      setTimeout(() => {
-        result.innerHTML = "";
-        loadQuiz();
-      }, 1500);
+      nextBtn.style.display = "inline-block";
     }
+
+    nextBtn.addEventListener("click", () => {
+      current++;
+      if (current < quizData.length) {
+        loadQuiz();
+      } else {
+        showFinalResult();
+      }
+    });
+
+    function showFinalResult() {
+      quizEl.innerHTML = `<h2>🎯 You completed the Momentum Quiz!</h2>
+        <p>Your Score: <b>${score}/${quizData.length}</b></p>`;
+      nextBtn.style.display = "none";
+      restartBtn.style.display = "inline-block";
+    }
+
+    restartBtn.addEventListener("click", () => {
+      current = 0;
+      score = 0;
+      restartBtn.style.display = "none";
+      loadQuiz();
+    });
+
+    loadQuiz();
   </script>
 </body>
 </html>
