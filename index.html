@@ -3,259 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Momentum Finance Quiz by Fact_Met</title>
+  <title>Momentum Quiz</title>
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(120deg, #0066ff, #00b3ff);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #111827, #1f2937);
       color: white;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: rgba(0, 0, 0, 0.2);
-      padding: 10px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
     }
-
+    header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+    }
     header img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+      height: 40px;
+      border-radius: 10px;
     }
-
     header a {
-      color: white;
+      color: #38bdf8;
+      margin-left: 10px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 18px;
     }
-
-    .quiz-container {
-      margin-top: 40px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      border-radius: 12px;
-      width: 90%;
+    .container {
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
-
     button {
-      background: white;
-      color: #0077ff;
+      background: #38bdf8;
+      color: black;
       border: none;
       padding: 10px 20px;
-      margin: 10px;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 16px;
-    }
-
-    button:hover {
-      background: #00b3ff;
-      color: white;
-    }
-
-    #result {
-      font-weight: bold;
       margin-top: 20px;
     }
-
-    #progress {
-      margin-top: 10px;
-      font-size: 14px;
-      opacity: 0.8;
+    button:hover { background: #0ea5e9; }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="WhatsApp%20Image%202025-10-17%20at%2011.13.59%20PM.jpeg" alt="Profile" />
-    <a href="https://x.com/fact_met" target="_blank">@fact_met</a>
+    <img src="WhatsApp Image 2025-10-17 at 11.13.59 PM.jpeg" alt="Logo" />
+    <div>
+      <a href="https://x.com/fact_met" target="_blank">My X Profile</a> |
+      <a href="https://discord.gg/" target="_blank">Discord</a> |
+      <a href="https://momentum.xyz" target="_blank">Website</a>
+    </div>
   </header>
 
-  <div class="quiz-container">
-    <h2 id="question">Loading question...</h2>
-    <div id="options"></div>
-    <div id="result"></div>
-    <div id="progress"></div>
-    <button id="nextBtn" style="display:none;">Next</button>
+  <div class="container">
+    <h1>🚀 Welcome to the Momentum Quiz!</h1>
+    <p>Test your Web3 and crypto knowledge — earn rewards and boost your rank!</p>
+    <div id="quiz-box">
+      <button id="start-btn">Start Quiz</button>
+    </div>
+    <div id="result" class="result"></div>
   </div>
 
   <script>
-    const quiz = [
-      {
-        question: "1️⃣ What is Momentum Finance (MMT)?",
-        options: [
-          "A meme coin on Ethereum",
-          "A full-stack DeFi protocol on Sui",
-          "A centralized crypto exchange",
-          "A Bitcoin fork"
-        ],
-        correct: 1
-      },
-      {
-        question: "2️⃣ What key problem does Momentum aim to solve?",
-        options: [
-          "Blockchain gaming lag",
-          "Fragmentation in liquidity and compliance",
-          "NFT storage issues",
-          "Slow Bitcoin transactions"
-        ],
-        correct: 1
-      },
-      {
-        question: "3️⃣ On which blockchain is Momentum primarily built?",
-        options: ["Solana", "Ethereum", "Sui", "Aptos"],
-        correct: 2
-      },
-      {
-        question: "4️⃣ What is the native token of Momentum?",
-        options: ["$MOM", "$MOVE", "$MMT", "$MOMO"],
-        correct: 2
-      },
-      {
-        question: "5️⃣ Who is the founder and CEO of Momentum Finance?",
-        options: [
-          "Mario Nawfal",
-          "Vinson Leow",
-          "Wendy 'ChefWEN' Fu",
-          "Hans Wang"
-        ],
-        correct: 2
-      },
-      {
-        question: "6️⃣ What unique feature does Momentum DEX offer?",
-        options: [
-          "Fixed-price trading",
-          "Concentrated liquidity (CLMM) with Zap In/Out",
-          "Only Bitcoin trading pairs",
-          "Layer 2 rollups"
-        ],
-        correct: 1
-      },
-      {
-        question: "7️⃣ What is xSUI in the Momentum ecosystem?",
-        options: [
-          "Momentum’s token",
-          "A meme coin",
-          "A liquid staking version of SUI",
-          "A lending platform"
-        ],
-        correct: 2
-      },
-      {
-        question: "8️⃣ What is MSafe used for?",
-        options: [
-          "NFT minting",
-          "Multi-sig wallet and treasury management",
-          "Bridging tokens between Ethereum and Sui",
-          "AI-based trading"
-        ],
-        correct: 1
-      },
-      {
-        question: "9️⃣ Which feature lets projects launch tokens without fees?",
-        options: [
-          "Momentum Vaults",
-          "Momentum X",
-          "Token Generation Lab (TGL)",
-          "Zap Protocol"
-        ],
-        correct: 2
-      },
-      {
-        question: "🔟 What is the governance model of $MMT?",
-        options: [
-          "DAO-only voting",
-          "ve(3,3) model with locked voting power (veMMT)",
-          "Proof-of-Work mining",
-          "Centralized management"
-        ],
-        correct: 1
-      },
-      {
-        question: "11️⃣ What is one major partnership Momentum has?",
-        options: [
-          "Netflix",
-          "Sui Foundation, OKX, Coinbase, Circle",
-          "Only Binance Labs",
-          "None yet"
-        ],
-        correct: 1
-      },
-      {
-        question: "12️⃣ What is the overall goal of Momentum Finance?",
-        options: [
-          "Create meme coins",
-          "Unify trading, liquidity, and compliance for RWAs",
-          "Replace Ethereum",
-          "Focus on gaming NFTs"
-        ],
-        correct: 1
-      }
+    const quizData = [
+      { q: "What is DeFi short for?", a: "Decentralized Finance" },
+      { q: "Which blockchain is known for smart contracts?", a: "Ethereum" },
+      { q: "What is a crypto wallet used for?", a: "Storing digital assets" },
+      { q: "What does NFT stand for?", a: "Non-Fungible Token" },
+      { q: "Which consensus mechanism does Bitcoin use?", a: "Proof of Work" },
+      { q: "What is staking in crypto?", a: "Locking tokens to support the network" },
+      { q: "What is a DAO?", a: "Decentralized Autonomous Organization" },
+      { q: "What is the native token of Ethereum?", a: "ETH" },
+      { q: "What is a blockchain?", a: "A distributed digital ledger" },
+      { q: "What does Web3 represent?", a: "A decentralized internet" },
+      { q: "What is the main purpose of an airdrop?", a: "Reward users with free tokens" },
+      { q: "What is liquidity in crypto?", a: "Ease of trading an asset" },
     ];
 
-    let currentQuestion = 0;
-    let answered = false;
+    const quizBox = document.getElementById("quiz-box");
+    const result = document.getElementById("result");
+    const startBtn = document.getElementById("start-btn");
 
-    const questionEl = document.getElementById("question");
-    const optionsEl = document.getElementById("options");
-    const resultEl = document.getElementById("result");
-    const progressEl = document.getElementById("progress");
-    const nextBtn = document.getElementById("nextBtn");
+    let index = 0;
 
-    function loadQuestion() {
-      answered = false;
-      resultEl.textContent = "";
-      nextBtn.style.display = "none";
-      const q = quiz[currentQuestion];
-      questionEl.textContent = q.question;
-      progressEl.textContent = `Question ${currentQuestion + 1} of ${quiz.length}`;
-      optionsEl.innerHTML = "";
-      q.options.forEach((opt, index) => {
-        const btn = document.createElement("button");
-        btn.textContent = opt;
-        btn.onclick = () => checkAnswer(index);
-        optionsEl.appendChild(btn);
-      });
+    startBtn.addEventListener("click", () => loadQuiz());
+
+    function loadQuiz() {
+      if (index < quizData.length) {
+        const current = quizData[index];
+        quizBox.innerHTML = `
+          <h2>${current.q}</h2>
+          <input type="text" id="answer" placeholder="Type your answer..." />
+          <button onclick="checkAnswer()">Submit</button>
+        `;
+      } else {
+        quizBox.innerHTML = `<h2>🎉 Quiz Completed!</h2>`;
+      }
     }
 
-    function checkAnswer(index) {
-      if (answered) return;
-      answered = true;
-      const q = quiz[currentQuestion];
-      if (index === q.correct) {
-        resultEl.textContent = "✅ Correct!";
-        resultEl.style.color = "#00ff00";
-      } else {
-        resultEl.textContent = "❌ Incorrect! Correct answer: " + q.options[q.correct];
-        resultEl.style.color = "#ff0000";
-      }
-      nextBtn.style.display = "inline-block";
-    }
-
-    nextBtn.onclick = () => {
-      currentQuestion++;
-      if (currentQuestion < quiz.length) {
-        loadQuestion();
-      } else {
-        questionEl.textContent = "🎉 You’ve completed the Momentum Quiz! 🚀";
-        optionsEl.innerHTML = "";
-        resultEl.textContent = "";
-        progressEl.textContent = "";
-        nextBtn.style.display = "none";
-      }
-    };
-
-    loadQuestion();
-  </script>
-</body>
-</html>
+    function checkAnswer() {
+      const answer = document.getElementById("answer").value.trim();
+      const correct = quizData[index].a.toLowerCase();
+      if (answer.toLowerCase() === correct) {
+        result.innerHTML =
