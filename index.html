@@ -6,72 +6,81 @@
   <title>Momentum Quiz</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #111827, #1f2937);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #000);
+      color: #fff;
       margin: 0;
       text-align: center;
+      overflow-x: hidden;
     }
     header {
-      width: 100%;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.8);
       padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.1);
+      border-bottom: 2px solid #3b82f6;
     }
     header img {
       height: 40px;
-      border-radius: 10px;
+      border-radius: 8px;
     }
     header a {
-      color: #38bdf8;
-      margin-left: 10px;
+      color: #3b82f6;
       text-decoration: none;
       font-weight: bold;
+      margin-left: 15px;
+      transition: color 0.3s;
     }
+    header a:hover { color: #60a5fa; }
+
     .container {
+      margin: 60px auto;
       max-width: 600px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(17, 24, 39, 0.8);
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    }
+    h1 { color: #60a5fa; margin-bottom: 10px; }
+    p { color: #cbd5e1; }
+    input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-top: 15px;
+      font-size: 16px;
     }
     button {
-      background: #38bdf8;
-      color: black;
+      background: #3b82f6;
+      color: white;
       border: none;
       padding: 10px 20px;
       border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-    button:hover { background: #0ea5e9; }
-    .result {
       margin-top: 15px;
-      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.3s;
     }
+    button:hover { background: #2563eb; }
+    .result { margin-top: 15px; font-weight: bold; }
   </style>
 </head>
 <body>
   <header>
-    <img src="WhatsApp Image 2025-10-17 at 11.13.59 PM.jpeg" alt="Logo" />
+    <img src="WhatsApp Image 2025-10-17 at 11.13.59 PM.jpeg" alt="Momentum Logo">
     <div>
-      <a href="https://x.com/fact_met" target="_blank">My X Profile</a> |
+      <a href="https://x.com/fact_met" target="_blank">My X</a> |
       <a href="https://discord.gg/" target="_blank">Discord</a> |
       <a href="https://momentum.xyz" target="_blank">Website</a>
     </div>
   </header>
 
   <div class="container">
-    <h1>🚀 Welcome to the Momentum Quiz!</h1>
-    <p>Test your Web3 and crypto knowledge — earn rewards and boost your rank!</p>
+    <h1>🚀 Momentum Quiz</h1>
+    <p>Test your crypto knowledge & boost your Momentum rank!</p>
     <div id="quiz-box">
       <button id="start-btn">Start Quiz</button>
     </div>
@@ -81,26 +90,24 @@
   <script>
     const quizData = [
       { q: "What is DeFi short for?", a: "Decentralized Finance" },
-      { q: "Which blockchain is known for smart contracts?", a: "Ethereum" },
+      { q: "Which blockchain introduced smart contracts?", a: "Ethereum" },
       { q: "What is a crypto wallet used for?", a: "Storing digital assets" },
       { q: "What does NFT stand for?", a: "Non-Fungible Token" },
-      { q: "Which consensus mechanism does Bitcoin use?", a: "Proof of Work" },
+      { q: "What is Bitcoin’s consensus mechanism?", a: "Proof of Work" },
       { q: "What is staking in crypto?", a: "Locking tokens to support the network" },
       { q: "What is a DAO?", a: "Decentralized Autonomous Organization" },
       { q: "What is the native token of Ethereum?", a: "ETH" },
-      { q: "What is a blockchain?", a: "A distributed digital ledger" },
+      { q: "What is blockchain?", a: "A distributed digital ledger" },
       { q: "What does Web3 represent?", a: "A decentralized internet" },
-      { q: "What is the main purpose of an airdrop?", a: "Reward users with free tokens" },
+      { q: "What is the purpose of an airdrop?", a: "Reward users with free tokens" },
       { q: "What is liquidity in crypto?", a: "Ease of trading an asset" },
     ];
 
+    let index = 0;
     const quizBox = document.getElementById("quiz-box");
     const result = document.getElementById("result");
-    const startBtn = document.getElementById("start-btn");
 
-    let index = 0;
-
-    startBtn.addEventListener("click", () => loadQuiz());
+    document.getElementById("start-btn").addEventListener("click", loadQuiz);
 
     function loadQuiz() {
       if (index < quizData.length) {
@@ -111,12 +118,24 @@
           <button onclick="checkAnswer()">Submit</button>
         `;
       } else {
-        quizBox.innerHTML = `<h2>🎉 Quiz Completed!</h2>`;
+        quizBox.innerHTML = `<h2>🎉 You completed the Momentum Quiz!</h2>`;
       }
     }
 
     function checkAnswer() {
-      const answer = document.getElementById("answer").value.trim();
+      const ans = document.getElementById("answer").value.trim().toLowerCase();
       const correct = quizData[index].a.toLowerCase();
-      if (answer.toLowerCase() === correct) {
-        result.innerHTML =
+      if (ans === correct) {
+        result.innerHTML = "✅ Correct!";
+      } else {
+        result.innerHTML = `❌ Incorrect! Correct: <b>${quizData[index].a}</b>`;
+      }
+      index++;
+      setTimeout(() => {
+        result.innerHTML = "";
+        loadQuiz();
+      }, 1500);
+    }
+  </script>
+</body>
+</html>
