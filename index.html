@@ -1,137 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Momentum Finance Quiz — Fact_Met</title>
 <style>
-  :root{
-    --bg-1:#000814;
-    --bg-2:#001f3f;
-    --accent:#00aaff;
-    --card:#071229;
-    --muted:#cbd5e1;
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #001233, #003566);
+    color: white;
+    margin: 0;
+    text-align: center;
   }
-  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
-  body{
-    background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
-    color:#fff;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    display:flex;
-    flex-direction:column;
-    min-height:100vh;
-    align-items:center;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(0, 0, 30, 0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
   }
+  .logo { height: 60px; }
+  .profile { height: 50px; border-radius: 50%; border: 2px solid #00aaff; }
+  .links a {
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 8px;
+  }
+  .links a:hover { color: #80e0ff; }
 
-  header{
-    width:100%;
-    max-width:1100px;
-    margin:18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
+  .container {
+    max-width: 800px;
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 40px auto;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
   }
-  .left, .center, .right { display:flex; align-items:center; gap:12px; }
-  .profile-pic{
-    width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,170,255,0.9);
-    box-shadow:0 6px 18px rgba(0,170,255,0.08);
+  h1 { color: #00aaff; }
+  .btn {
+    background-color: #00aaff;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
   }
-  .momentum-logo{
-    height:60px; object-fit:contain;
-    filter: drop-shadow(0 6px 14px rgba(0,170,255,0.12));
+  .btn:hover { background-color: #007acc; }
+  .option {
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
   }
-  .links a{
-    color:var(--accent);
-    text-decoration:none;
-    font-weight:600;
-    font-size:14px;
-  }
-  .links a:hover{color:#66d4ff;text-decoration:underline;}
-
-  .card{
-    width:100%;
-    max-width:820px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.04);
-    border-radius:16px;
-    padding:28px;
-    box-shadow:0 20px 60px rgba(2,6,23,0.6);
-    margin-bottom:36px;
-  }
-
-  h1{ margin:0 0 8px 0; color:var(--accent); font-size:26px; letter-spacing:0.2px; }
-  p.lead{ margin:0 0 18px 0; color:var(--muted); }
-
-  .progress{ color:var(--muted); font-size:14px; margin-bottom:12px; }
-
-  .question{ font-size:20px; margin:18px 0; color:#e6f7ff; min-height:56px; display:flex; align-items:center; justify-content:center; text-align:center; }
-  .options{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .option{
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    border:1px solid rgba(255,255,255,0.04);
-    padding:12px 14px; border-radius:10px; cursor:pointer; font-weight:600;
-    transition:all .18s ease; color:#dff7ff;
-  }
-  .option:hover{ transform:translateY(-4px); box-shadow:0 8px 20px rgba(0,170,255,0.08); border-color:rgba(0,170,255,0.35); }
-  .option.correct{ background:linear-gradient(90deg,#064e2b,#10704a); border-color:#22c55e; color:#eafff0; }
-  .option.wrong{ background:linear-gradient(90deg,#4a0b0b,#6b1212); border-color:#ef4444; color:#fff6f6; }
-
-  .feedback{ margin-top:14px; font-weight:700; min-height:28px; }
-  .controls{ display:flex; gap:12px; justify-content:center; margin-top:18px; flex-wrap:wrap; }
-  .btn{
-    background:var(--accent); color:#001018; border:none; padding:10px 18px; border-radius:999px; font-weight:700; cursor:pointer;
-    box-shadow:0 10px 30px rgba(0,170,255,0.12);
-  }
-  .btn.secondary{ background:transparent;color:var(--accent); border:1px solid rgba(0,170,255,0.12); }
-
-  .score-box{ text-align:center; margin-top:10px; color:#e6f7ff; }
-  .final{ font-size:20px; margin-top:12px; color:#d9f9ff; }
-
-  footer{
-    width:100%;
-    max-width:1100px;
-    color:#9fbcd9;
-    margin:8px 18px 36px;
-    font-size:14px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:16px;
-  }
-
-  @media (max-width:720px){
-    .options{ grid-template-columns:1fr; }
-    header{ margin:12px; }
-    .card{ padding:20px; margin:18px; }
-    .momentum-logo{ height:48px; }
+  .option:hover { background-color: rgba(0,170,255,0.2); }
+  .correct { background-color: #007f3f !important; border-color: #00ff88 !important; }
+  .wrong { background-color: #8b0000 !important; border-color: #ff5555 !important; }
+  .feedback { font-weight: bold; margin-top: 10px; }
+  footer {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(0, 0, 30, 0.7);
+    color: #ccc;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="left">
-    <img src="WhatsApp%20Image%202025-10-17%20at%2011.13.59%20PM.jpeg" alt="Profile" class="profile-pic" />
-  </div>
-
-  <div class="center" style="justify-content:center;flex:1;">
-    <img src="Screenshot%202025-10-17%20230029.png" alt="Momentum Logo" class="momentum-logo" />
-  </div>
-
-  <div class="right links">
-    <a href="https://discord.gg/mmtfinance" target="_blank" rel="noopener">Discord</a> |
-    <a href="https://x.com/MMTFinance" target="_blank" rel="noopener">X (Twitter)</a> |
-    <a href="https://www.mmt.finance/" target="_blank" rel="noopener">Website</a> |
-    <a href="https://x.com/fact_met" target="_blank" rel="noopener">@fact_met</a>
+  <img src="WhatsApp%20Image%202025-10-17%20at%2011.13.59%20PM.jpeg" class="profile" alt="Profile">
+  <img src="Screenshot%202025-10-17%20230029.png" class="logo" alt="Momentum Logo">
+  <div class="links">
+    <a href="https://discord.gg/mmtfinance" target="_blank">Discord</a> |
+    <a href="https://x.com/MMTFinance" target="_blank">X</a> |
+    <a href="https://www.mmt.finance/" target="_blank">Website</a> |
+    <a href="https://x.com/fact_met" target="_blank">@fact_met</a>
   </div>
 </header>
 
-<!-- rest of the code remains unchanged -->
-<!-- (same quiz, same styling, same footer, same JS) -->
+<div class="container">
+  <h1>🚀 Momentum Knowledge Quiz</h1>
+  <div id="quiz">
+    <p id="question"></p>
+    <div id="options"></div>
+    <p class="feedback" id="feedback"></p>
+    <button class="btn" id="nextBtn" style="display:none;">Next</button>
+  </div>
+  <div id="result" style="display:none;">
+    <h2>Your Score: <span id="score"></span>/12</h2>
+    <button class="btn" onclick="restartQuiz()">Restart Quiz</button>
+  </div>
+</div>
+
+<footer>
+  © 2025 Momentum Community Quiz | Built by @fact_met
+</footer>
+
 <script>
-// quiz code same as before (no changes)
+document.addEventListener("DOMContentLoaded", () => {
+
+  const quizData = [
+    { question: "Momentum Finance is primarily built on which blockchain?", options: ["Ethereum", "Solana", "Sui", "Aptos"], answer: "Sui" },
+    { question: "What does Momentum aim to unify in DeFi?", options: ["Gaming and NFTs", "Trading, Liquidity & Compliance", "Social Media & DAOs", "AI & Data"], answer: "Trading, Liquidity & Compliance" },
+    { question: "Who is the founder & CEO of Momentum Finance?", options: ["Vinson Leow", "ChefWEN (Wendy Fu)", "Hans Wang", "Mario Nawfal"], answer: "ChefWEN (Wendy Fu)" },
+    { question: "Which feature allows staking SUI while using it in DeFi?", options: ["xSUI", "xMOVE", "xDEX", "xTrade"], answer: "xSUI" },
+    { question: "What is Momentum DEX inspired by?", options: ["Uniswap v3", "PancakeSwap", "Curve", "SushiSwap"], answer: "Uniswap v3" },
+    { question: "Which product is Momentum’s multi-sig wallet?", options: ["MetaSafe", "MSafe", "Momentum Vault", "SecureX"], answer: "MSafe" },
+    { question: "What kind of assets does Momentum plan to support?", options: ["Only crypto assets", "Only NFTs", "Crypto & Real-World Assets", "Only stablecoins"], answer: "Crypto & Real-World Assets" },
+    { question: "Which governance model does $MMT follow?", options: ["Proof of Work", "ve(3,3)", "DAO Snapshot", "LP Mining"], answer: "ve(3,3)" },
+    { question: "Who are among Momentum’s backers?", options: ["Tesla", "Circle & OKX Ventures", "Meta", "BlackRock"], answer: "Circle & OKX Ventures" },
+    { question: "What’s the role of the Token Generation Lab (TGL)?", options: ["Launchpad for Sui projects", "NFT Marketplace", "Gaming Hub", "DePIN service"], answer: "Launchpad for Sui projects" },
+    { question: "Momentum's key DeFi focus area is?", options: ["AI Automation", "Tokenized RWAs", "Metaverse Avatars", "Mining Pools"], answer: "Tokenized RWAs" },
+    { question: "Momentum aims to be the ______ of crypto.", options: ["Apple", "Robinhood", "Google", "Meta"], answer: "Robinhood" }
+  ];
+
+  let current = 0, score = 0;
+  const questionEl = document.getElementById("question");
+  const optionsEl = document.getElementById("options");
+  const feedbackEl = document.getElementById("feedback");
+  const nextBtn = document.getElementById("nextBtn");
+  const resultEl = document.getElementById("result");
+  const quizEl = document.getElementById("quiz");
+  const scoreEl = document.getElementById("score");
+
+  function loadQuestion() {
+    feedbackEl.textContent = "";
+    nextBtn.style.display = "none";
+    const q = quizData[current];
+    questionEl.textContent = q.question;
+    optionsEl.innerHTML = "";
+    q.options.forEach(opt => {
+      const btn = document.createElement("div");
+      btn.classList.add("option");
+      btn.textContent = opt;
+      btn.addEventListener("click", () => selectAnswer(btn, q.answer));
+      optionsEl.appendChild(btn);
+    });
+  }
+
+  function selectAnswer(btn, correct) {
+    const opts = document.querySelectorAll(".option");
+    opts.forEach(b => b.style.pointerEvents = "none");
+    if (btn.textContent === correct) {
+      btn.classList.add("correct");
+      feedbackEl.textContent = "✅ Correct!";
+      score++;
+    } else {
+      btn.classList.add("wrong");
+      feedbackEl.textContent = "❌ Incorrect! Correct answer: " + correct;
+    }
+    nextBtn.style.display = "inline-block";
+  }
+
+  nextBtn.addEventListener("click", () => {
+    current++;
+    if (current < quizData.length) loadQuestion();
+    else endQuiz();
+  });
+
+  function endQuiz() {
+    quizEl.style.display = "none";
+    resultEl.style.display = "block";
+    scoreEl.textContent = score;
+  }
+
+  window.restartQuiz = function() {
+    current = 0;
+    score = 0;
+    resultEl.style.display = "none";
+    quizEl.style.display = "block";
+    loadQuestion();
+  };
+
+  // start on page load
+  loadQuestion();
+});
 </script>
+
 </body>
 </html>
