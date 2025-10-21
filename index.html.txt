@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Momentum Quiz</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+      color: #fff;
+    }
+
+    header, footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    header img {
+      width: 80px;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      display: inline;
+      margin-left: 10px;
+      font-size: 1.8rem;
+    }
+
+    main {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #1f1f1f;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    h2 {
+      color: #00e0ff;
+    }
+
+    .social-links {
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      margin: 0 10px;
+      color: #00e0ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      color: #00bcd4;
+    }
+
+    footer {
+      font-size: 0.9rem;
+      background: #0d0d0d;
+    }
+
+    footer .social-links {
+      margin-top: 10px;
+    }
+
+    footer img {
+      width: 25px;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="Screenshot 2025-10-17 230029.png" alt="Momentum Logo" />
+    <h1>Momentum Quiz</h1>
+    <div class="social-links">
+      <a href="https://discord.gg/mmtfinance" target="_blank">Discord</a> |
+      <a href="https://x.com/MMTFinance" target="_blank">X (Twitter)</a> |
+      <a href="https://www.mmt.finance/" target="_blank">Website</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="quiz-container">
+      <h2>🚀 Welcome to the Momentum Quiz!</h2>
+      <p>Test your Web3 and crypto knowledge — earn rewards and boost your rank in the Momentum community.</p>
+      <button style="background:#00e0ff; color:#000; border:none; padding:12px 25px; border-radius:8px; cursor:pointer; font-size:1rem;">Start Quiz</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Momentum Lab — All Rights Reserved</p>
+    <div class="social-links">
+      <a href="https://discord.gg/mmtfinance" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord" />
+      </a>
+      <a href="https://x.com/MMTFinance" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" />
+      </a>
+      <a href="https://www.mmt.finance/" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/84/84195.png" alt="Website" />
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
